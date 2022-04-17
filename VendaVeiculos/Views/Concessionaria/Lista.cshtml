@@ -1,0 +1,61 @@
+﻿@using VendaVeiculos.Models.Concessionaria
+@model IPagedList<Concessionaria>
+
+@{
+    ViewData["Titulo"] = "Registro de concessionárias - VendaVeículos";
+}
+
+<h4 class="text-center">Registro de concessionárias</h4>
+<div class="row justify-content-start mt-4 mt-md-2">
+    <div class="col">
+        <a class="btn btn-success" href="@Url.Action("Cadastro", "Concessionaria")">Novo registro</a>
+    </div>
+</div>
+<form asp-action="PaginacaoLista" id="form-lista" data-ajax-method="get"
+      data-ajax="true" data-ajax-update="#conteudo-tabela">
+    <div class="row justify-content-end mt-3">
+        <div class="col">
+            <label class="mr-1">Registros por página:</label>
+            <select id="qtd-registros" name="tamanhoPagina" onchange="$('#form-lista').submit()">
+                <option>25</option>
+                <option>50</option>
+                <option>100</option>
+            </select>
+        </div>
+        <div class="col-6 col-md-3">
+            <input class="form-control form-control-sm" name="pesquisa"
+                   type="search" placeholder="Pesquisar" oninput="$('#form-lista').submit()" />
+        </div>
+    </div>
+    <input name="pagina" type="hidden" value="@Model?.PageNumber" />
+</form>
+<div id="conteudo-tabela">
+    @{
+        await Html.RenderPartialAsync("Tabela", Model);
+    }
+</div>
+<div id="conteudo-modal-detalhamento">
+</div>
+<div class="modal fade" id="modal-remocao" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Confirmação</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form asp-action="RemoverRegistro" data-ajax="true" data-ajax-method="get"
+                  data-ajax-begin="$('#modal-remocao').modal('hide')" data-ajax-update="#conteudo-tabela">
+                <div class="modal-body">
+                    <label>Tem certeza que deseja remover o registro <strong id="registro-remocao"></strong>?</label>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-danger">Confirmar</button>
+                </div>
+                <input id="id-remocao" type="hidden" name="idConcessionaria" />
+            </form>
+        </div>
+    </div>
+</div>

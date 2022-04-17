@@ -1,0 +1,10 @@
+﻿<input id="tipo-notificacao" type="hidden" value="@ViewBag.Notificacao["tipo"]" />
+
+<div id="div-notificacao" class="alert alert-dismissible fade show" role="alert">
+    <strong id="titulo-notificacao"></strong> @ViewBag.Notificacao["mensagem"]
+    <button id="fechar-notificacao" type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<script src="~/js/shared/notificacao.js"></script>

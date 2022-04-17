@@ -1,0 +1,18 @@
+﻿.campo-invalido {
+    color: red;
+    font-size: 14px;
+}
+
+span.page-color {
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+}
+
+a.page-color {
+    color: #007bff !important;
+    border-color: #007bff !important;
+}
+
+    a.page-color:hover {
+        background-color: rgba(0, 0, 255, 0.1) !important;
+    }

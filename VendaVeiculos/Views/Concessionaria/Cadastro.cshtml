@@ -1,0 +1,121 @@
+﻿@using VendaVeiculos.Models.Concessionaria
+@using VendaVeiculos.Shared
+@model Concessionaria
+
+@{
+    ViewData["Titulo"] = "Cadastro de concessionária - VendaVeículos";
+}
+
+<h4 class="text-center">Cadastro de concessionária</h4>
+<form asp-action="ValidarCadastro" asp-antiforgery="true" data-ajax="true"
+      data-ajax-method="post" data-ajax-update="#ajax-update-area">
+    <div class="container" style="width: 90%">
+        <div class="row justify-content-center mt-4">
+            <div class="col-10 col-md-6">
+                <label for="razao-social">Razão Social</label>
+                <input asp-for="RazaoSocial" class="form-control" id="razao-social"
+                       maxlength="50" title="Razão Social da concessionária" />
+                <span asp-validation-for="RazaoSocial" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-4 mt-3 mt-md-0">
+                <label for="nome-fantasia">Nome Fantasia</label>
+                <input asp-for="NomeFantasia" class="form-control" id="nome-fantasia"
+                       maxlength="50" title="Nome fantasia da concessionária" />
+                <span asp-validation-for="NomeFantasia" class="campo-invalido"></span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-10 col-md-3">
+                <label for="cnpj">CNPJ</label>
+                <input asp-for="Cnpj" class="form-control cnpj" id="cnpj"
+                       placeholder="00.000.000/0000-00" title="CNPJ da concessionária" />
+                <span asp-validation-for="Cnpj" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-4 mt-3 mt-md-0">
+                <label for="email">Email</label>
+                <input asp-for="Email" type="text" class="form-control" id="email"
+                       placeholder="Endereço de email para contato" maxlength="30"
+                       title="Endereço de email para contato" />
+                <span asp-validation-for="Email" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-3 mt-3 mt-md-0">
+                <label for="telefone">Telefone</label>
+                <input asp-for="Telefone" class="form-control telefone" id="telefone" placeholder="00 000000000"
+                       title="Número de telefone para contato" />
+                <span asp-validation-for="Telefone" class="campo-invalido"></span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-10 col-md-3">
+                <label for="cep">CEP</label>
+                <input asp-for="Cep" class="form-control cep" id="cep" placeholder="00000-000"
+                       title="Informe o CEP para buscar os dados do endereço"
+                       oninput="BuscarEndereco(this.value)" />
+                <span asp-validation-for="Cep" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-5 mt-3 mt-md-0">
+                <label for="logradouro">Logradouro</label>
+                <input asp-for="Logradouro" class="form-control" id="logradouro" maxlength="30"
+                       title="Rua, avênida, condomínio, praça, rodovia, etc" />
+                <span asp-validation-for="Logradouro" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-2 mt-3 mt-md-0">
+                <label for="numero">Número</label>
+                <input asp-for="Numero" class="form-control" id="numero"
+                       maxlength="6" placeholder="0000" title="Número do endereço" />
+                <span asp-validation-for="Numero" class="campo-invalido"></span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-10 col-md-4">
+                <label for="bairro">Bairro</label>
+                <input asp-for="Bairro" class="form-control" id="bairro"
+                       maxlength="30" title="Bairro do endereço" />
+                <span asp-validation-for="Bairro" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-3 mt-3 mt-md-0">
+                <label for="cidade">Cidade</label>
+                <input asp-for="Cidade" class="form-control" id="cidade"
+                       maxlength="30" title="Cidade do endereço" />
+                <span asp-validation-for="Cidade" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-3 mt-3 mt-md-0">
+                <label for="uf">Estado</label>
+                <select asp-for="Uf" class="form-control" id="uf" title="Selecione o estado">
+                    <option class="d-none"></option>
+
+                    @foreach (var estado in Global.ListarEstados())
+                    {
+                        <option value="@estado.Key">@estado.Value</option>
+                    }
+
+                </select>
+                <span asp-validation-for="Uf" class="campo-invalido"></span>
+            </div>
+        </div>
+
+        @if (ViewBag.Notificacao != null)
+        {
+            <div class="row justify-content-center mt-3 mb-n3">
+                <div class="col-10">
+                    @{
+                        await Html.RenderPartialAsync("_Notificacao");
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-10 col-md-4">
+                <button class="btn btn-success btn-block" type="submit">Salvar</button>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-10 col-md-4">
+                <a class="btn btn-outline-danger btn-block" href="@Url.Action("Index", "Home")">Voltar</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="~/js/shared/global.js"></script>

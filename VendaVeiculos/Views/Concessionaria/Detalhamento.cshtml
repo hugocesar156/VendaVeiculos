@@ -1,0 +1,57 @@
+﻿@using VendaVeiculos.Models.Concessionaria
+@model Concessionaria
+
+<div class="modal fade" id="modal-detalhamento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registro de concessionária</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h5 class="mb-3">Dados gerais</h5>
+                        <div>
+                            <strong>Razão Social: </strong>
+                            <label class="text-capitalize">@Model.RazaoSocial</label>
+                        </div>
+                        <div>
+                            <strong>Nome Fantasia: </strong>
+                            <label class="text-capitalize">@Model.NomeFantasia</label>
+                        </div>
+                        <div>
+                            <strong>CNPJ: </strong>
+                            <label class="cnpj">@Model.Cnpj</label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="mb-3">Contato</h5>
+                        <div>
+                            <strong>Email: </strong>
+                            <label>@Model.Email</label>
+                        </div>
+                        <div>
+                            <strong>Telefone: </strong>
+                            <label class="telefone">@Model.Telefone</label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="mb-3">Endereço</h5>
+                        <div>
+                            <label class="text-capitalize">@Model.Logradouro, @Model.Bairro - @Model.Numero</label>
+                            <br /><label class="text-capitalize">@Model.Cidade, @Model.Uf | @Model.Cep</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/shared/global.js"></script>

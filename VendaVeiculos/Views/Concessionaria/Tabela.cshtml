@@ -1,0 +1,93 @@
+﻿@using VendaVeiculos.Models.Concessionaria
+@model IPagedList<Concessionaria>
+
+@if (ViewBag.Notificacao != null)
+{
+    <div class="row justify-content-center mt-3 mb-n4">
+        <div class="col">
+            @{
+                await Html.RenderPartialAsync("_Notificacao");
+            }
+        </div>
+    </div>
+}
+
+<div class="row justify-content-center mt-3">
+    <div class="col" style="height: @(Model != null ? "450px" : "0px"); overflow-y: auto;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Razão Social</th>
+                    <th>Nome Fantasia</th>
+                    <th>CNPJ</th>
+                    <th class="text-center">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model ?? new List<Concessionaria>().ToPagedList())
+                {
+                    <tr>
+                        <td class="align-middle text-capitalize">@item.RazaoSocial</td>
+                        <td class="align-middle text-capitalize">@item.NomeFantasia</td>
+                        <td class="align-middle cnpj">@item.Cnpj</td>
+                        <td style="width: 15%;">
+                            <div class="btn-group btn-block" role="group">
+                                <a class="btn btn-sm btn-outline-danger" data-toggle="modal"
+                               data-target="#modal-remocao" href="#"
+                               onclick="$('#registro-remocao').html('@item.RazaoSocial');$('#id-remocao').val('@item.IdConcessionaria')">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                                <a class="btn btn-sm btn-outline-primary" data-ajax="true"
+                               data-ajax-update="#conteudo-modal-detalhamento"
+                               data-ajax-success="$('#modal-detalhamento').modal('show')"
+                               href="@Url.Action("Detalhamento", new { item.IdConcessionaria })">
+                                    <i class="fa fa-info-circle"></i>
+                                </a>
+                                <a class="btn btn-sm btn-outline-primary"
+                               href="@Url.Action("Edicao", new { idConcessionaria = item.IdConcessionaria })">
+                                    <i class="fa fa-pen"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row justify-content-center mt-3">
+    <div class="col mt-3">
+        @{
+            if (Model != null)
+            {
+                <p>Exibindo @Model.FirstItemOnPage a @Model.LastItemOnPage de @Model.TotalItemCount registros totais</p>
+            }
+            else
+            {
+                <p class="text-center">Nenhum registro encontrado.</p>
+            }
+        }
+
+    </div>
+    <div class="ml-auto m-3">
+        @Html.PagedListPager(Model ?? new List<Concessionaria>().ToPagedList(),
+        pagina => Url.Action("PaginacaoLista",
+        new { pagina = pagina, tamanhoPagina = ViewBag.TamanhoPagina ?? 25, pesquisa = ViewBag.Pesquisa }),
+        PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(
+        new PagedListRenderOptions() {
+        DisplayLinkToFirstPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToLastPage = PagedListDisplayMode.IfNeeded,
+        DisplayLinkToNextPage = PagedListDisplayMode.Never,
+        DisplayLinkToPreviousPage = PagedListDisplayMode.Never,
+        MaximumPageNumbersToDisplay = 5,
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link", "page-color" },},
+        new AjaxOptions(){
+        HttpMethod = "GET",
+        UpdateTargetId = "conteudo-tabela"}))
+    </div>
+</div>
+
+<script src="~/js/shared/global.js"></script>
