@@ -732,3 +732,4 @@ D:\Projetos\Venda veículos\plataforma\VendaVeiculos\obj\Debug\netcoreapp3.1\Ven
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\obj\Debug\netcoreapp3.1\VendaVeiculos.dll
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\obj\Debug\netcoreapp3.1\VendaVeiculos.pdb
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\obj\Debug\netcoreapp3.1\VendaVeiculos.genruntimeconfig.cache
+D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\obj\Debug\netcoreapp3.1\Razor\Views\Veiculo\Cadastro.cshtml.g.cs
