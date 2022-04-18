@@ -20,11 +20,19 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Concessionária</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Concessionária</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="@Url.Action("Cadastro", "Concessionaria")">Cadastro</a>
                                 <a class="dropdown-item" href="@Url.Action("Lista", "Concessionaria")">Lista</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veículo</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="@Url.Action("Cadastro", "Veiculo")">Cadastro</a>
+                                <a class="dropdown-item" href="#">Lista</a>
                             </div>
                         </li>
                     </ul>

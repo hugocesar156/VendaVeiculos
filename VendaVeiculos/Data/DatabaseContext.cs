@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using VendaVeiculos.Models.Concessionaria;
+using VendaVeiculos.Models.Veiculo;
 
 namespace VendaVeiculos.Data
 {
@@ -8,5 +9,7 @@ namespace VendaVeiculos.Data
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) {}
 
         public DbSet<Concessionaria> Concessionaria { get; set; }
+        public DbSet<Veiculo> Veiculo { get; set; }
+        public DbSet<Tipo> Tipo { get; set; }
     }
 }

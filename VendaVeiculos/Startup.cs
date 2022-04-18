@@ -31,6 +31,7 @@ namespace VendaVeiculos
               Configuration.GetConnectionString("VendaVeiculos"), serverVersion));
 
             services.AddScoped<ConcessionariaR>();
+            services.AddScoped<VeiculoR>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

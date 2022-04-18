@@ -1,0 +1,99 @@
+﻿@using VendaVeiculos.Models.Veiculo
+@using VendaVeiculos.Shared
+@model Veiculo
+
+@{
+    ViewData["Titulo"] = "Cadastro de veículo - VendaVeículos";
+}
+
+<h4 class="text-center">Cadastro de veículo</h4>
+<form asp-action="ValidarCadastro" asp-antiforgery="true" data-ajax="true"
+      data-ajax-method="post" data-ajax-update="#ajax-update-area">
+    <div class="container" style="width: 90%">
+        <div class="row justify-content-center mt-4">
+            <div class="col-10 col-md-3">
+                <label for="concessionaria">Concessionária</label>
+                <select asp-for="IdConcessionaria" class="form-control" id="concessionaria" title="Selecione a concessionária">
+                    <option class="d-none"></option>
+
+                    @foreach (var concessionaria in ViewBag.Concessionarias)
+                    {
+                        <option value="@concessionaria.IdConcessionaria">@concessionaria.NomeFantasia</option>
+                    }
+
+                </select>
+                <span asp-validation-for="IdConcessionaria" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-3">
+                <label for="tipo">Tipo de veículo</label>
+                <select asp-for="IdTipo" class="form-control" id="tipo" title="Selecione o tipo de veículo"
+                        onchange="BuscarFabricantes(this.value)">
+                    <option class="d-none"></option>
+                    <option value="1">Carro</option>
+                    <option value="2">Moto</option>
+                </select>
+                <span asp-validation-for="IdTipo" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-4">
+                <label for="fabricante">Fabricante</label>
+                <select asp-for="Fabricante" class="form-control" id="fabricante"
+                        title="Selecione o fabricante" onchange="BuscarModelos(this.value)">
+                </select>
+                <span asp-validation-for="Fabricante" class="campo-invalido"></span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-10 col-md-4">
+                <label for="modelo">Modelo</label>
+                <select asp-for="Modelo" class="form-control" id="modelo"
+                        title="Selecione o modelo" onchange="BuscarAnosModelo(this.value)">
+                </select>
+                <span asp-validation-for="Modelo" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-2">
+                <label for="ano-modelo">Ano do modelo</label>
+                <select asp-for="AnoModelo" class="form-control" id="ano-modelo"
+                        title="Selecione o ano do modelo" onchange="BuscarValor(this.value)">
+                </select>
+                <span asp-validation-for="AnoModelo" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-2">
+                <label for="codigo-fipe">Código FIPE</label>
+                <input asp-for="CodigoFipe" class="form-control" id="codigo-fipe"
+                       placeholder="000000-0" title="Preenchido automaticamente" readonly />
+                <span asp-validation-for="CodigoFipe" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-2">
+                <label for="valor-fipe">Valor FIPE</label>
+                <input asp-for="ValorFipe" class="form-control" id="valor-fipe"
+                       title="Preenchido automaticamente" readonly />
+                <span asp-validation-for="ValorFipe" class="campo-invalido"></span>
+            </div>
+        </div>
+
+        @if (ViewBag.Notificacao != null)
+        {
+            <div class="row justify-content-center mt-3 mb-n3">
+                <div class="col-10">
+                    @{
+                        await Html.RenderPartialAsync("_Notificacao");
+                    }
+                </div>
+            </div>
+        }
+
+        <div class="row justify-content-center mt-4">
+            <div class="col-10 col-md-4">
+                <button class="btn btn-success btn-block" type="submit">Salvar</button>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-10 col-md-4">
+                <a class="btn btn-outline-danger btn-block" href="@Url.Action("Index", "Home")">Voltar</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="~/js/veiculo/formulario.js"></script>
+<script src="~/js/shared/global.js"></script>
