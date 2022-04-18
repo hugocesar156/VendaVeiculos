@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using VendaVeiculos.Models.Concessionaria;
 using X.PagedList;
@@ -40,15 +42,38 @@ namespace VendaVeiculos.Repositories
             }
         }
 
-        public IPagedList<Concessionaria> Listar(int pagina = 1, int tamanhoPagina = 25, string pesquisa = "")
+        public List<Concessionaria> Listar()
         {
             try
             {
-                return _banco.Concessionaria
-                    .Where(c => c.RazaoSocial.ToLower().Contains(pesquisa) ||
-                    c.NomeFantasia.ToLower().Contains(pesquisa) ||
-                    c.Cnpj.ToLower().Contains(pesquisa))
-                    .OrderBy(c => c.RazaoSocial).ToPagedList(pagina, tamanhoPagina);
+                return _banco.Concessionaria.Select(c => new Concessionaria()
+                {
+                    IdConcessionaria = c.IdConcessionaria,
+                    NomeFantasia = c.NomeFantasia,
+                    Cnpj = c.Cnpj
+                }).OrderBy(c => c.NomeFantasia).ToList();
+            }
+            catch (Exception)
+            {
+                return new List<Concessionaria>();
+            }
+        }
+
+        public IPagedList<Concessionaria> ListarPaginado(int pagina = 1, int tamanhoPagina = 25, string pesquisa = "")
+        {
+            try
+            {
+                return _banco.Concessionaria.Select(c => new Concessionaria() 
+                {
+                    IdConcessionaria = c.IdConcessionaria,
+                    RazaoSocial = c.RazaoSocial,
+                    NomeFantasia = c.NomeFantasia,
+                    Cnpj = c.Cnpj
+                }).Where(c => 
+                c.RazaoSocial.ToLower().Contains(pesquisa) ||
+                c.NomeFantasia.ToLower().Contains(pesquisa) ||
+                c.Cnpj.ToLower().Contains(pesquisa))
+                .OrderBy(c => c.RazaoSocial).ToPagedList(pagina, tamanhoPagina);
             }
             catch (Exception ex)
             {

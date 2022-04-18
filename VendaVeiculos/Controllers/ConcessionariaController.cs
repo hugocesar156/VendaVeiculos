@@ -43,7 +43,7 @@ namespace VendaVeiculos.Controllers
         {
             try
             {
-                return View(_reposConcessionaria.Listar());
+                return View(_reposConcessionaria.ListarPaginado());
             }
             catch (Exception)
             {
@@ -72,7 +72,7 @@ namespace VendaVeiculos.Controllers
                 ViewBag.TamanhoPagina = tamanhoPagina;
                 ViewBag.Pesquisa = pesquisa;
 
-                var lista = _reposConcessionaria.Listar(pagina, tamanhoPagina, pesquisa?.Trim()?.ToLower() ?? "");
+                var lista = _reposConcessionaria.ListarPaginado(pagina, tamanhoPagina, pesquisa?.Trim()?.ToLower() ?? "");
                 return PartialView("Tabela", lista);
             }
             catch (Exception)
@@ -106,7 +106,7 @@ namespace VendaVeiculos.Controllers
 
             try
             {
-                return PartialView("Tabela", _reposConcessionaria.Listar());
+                return PartialView("Tabela", _reposConcessionaria.ListarPaginado());
             }
             catch (Exception)
             {
