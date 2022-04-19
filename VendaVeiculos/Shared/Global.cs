@@ -4,6 +4,13 @@ namespace VendaVeiculos.Shared
 {
     public class Global
     {
+        public enum SituacaoVeiculo
+        {
+            Novo = 1,
+            SemiNovo,
+            Usado
+        }
+
         public static class MensagemCampo
         {
             public const string CAMPO_DUPLICADO = "Valor informado já registrado";
@@ -32,6 +39,18 @@ namespace VendaVeiculos.Shared
             public const string SUCESSO_REMOCAO = "Registro removido com sucesso.";
         }
 
+        public static Dictionary<int, string> ListarCombustivel()
+        {
+            return new Dictionary<int, string>
+            {
+                {1, "Elétrico"},
+                {2, "Etanol"},
+                {3, "Diesel"},
+                {4, "Gasolina"},
+                {5, "Híbrido"}
+            };
+        }
+
         public static Dictionary<string, string> ListarEstados()
         {
             return new Dictionary<string, string>
@@ -43,7 +62,7 @@ namespace VendaVeiculos.Shared
                 {"BA", "Bahia"},
                 {"CE", "Ceará"},
                 {"DF", "Distrito Federal"},
-                {"ES", "Esperito Santo"},
+                {"ES", "Espírito Santo"},
                 {"GO", "Goiás"},
                 {"MA", "Maranhão"},
                 {"MT", "Manto Grosso"},
@@ -63,6 +82,25 @@ namespace VendaVeiculos.Shared
                 {"SP", "São Paulo"},
                 {"SE", "Sergipe"},
                 {"TO", "Tocantins"}
+            };
+        }
+
+        public static Dictionary<int, string> ListarSituacaoVeiculo()
+        {
+            return new Dictionary<int, string>
+            {
+                {1, "Novo"},
+                {2, "Semi-novo"},
+                {3, "Usado"},
+            };
+        }
+
+        public static Dictionary<int, string> ListarTipoVeiculo()
+        {
+            return new Dictionary<int, string>
+            {
+                {1, "Carro"},
+                {2, "Moto"}
             };
         }
     }

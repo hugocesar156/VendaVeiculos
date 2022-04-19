@@ -11,14 +11,16 @@
       data-ajax-method="post" data-ajax-update="#ajax-update-area">
     <div class="container" style="width: 90%">
         <div class="row justify-content-center mt-4">
-            <div class="col-10 col-md-3">
+            <div class="col-10 col-md-4">
                 <label for="concessionaria">Concessionária</label>
-                <select asp-for="IdConcessionaria" class="form-control" id="concessionaria" title="Selecione a concessionária">
-                    <option class="d-none"></option>
+                <select asp-for="IdConcessionaria" class="form-control selectpicker" id="concessionaria"
+                        title="Selecione a concessionária" data-live-search="true" data-live-search-placeholder="Pesquisar">
 
                     @foreach (var concessionaria in ViewBag.Concessionarias)
                     {
-                        <option value="@concessionaria.IdConcessionaria">@concessionaria.NomeFantasia</option>
+                        <option value="@concessionaria.IdConcessionaria" data-subtext="@concessionaria.Cnpj">
+                            @concessionaria.NomeFantasia
+                        </option>
                     }
 
                 </select>
@@ -26,36 +28,53 @@
             </div>
             <div class="col-10 col-md-3">
                 <label for="tipo">Tipo de veículo</label>
-                <select asp-for="IdTipo" class="form-control" id="tipo" title="Selecione o tipo de veículo"
+                <select asp-for="IdTipo" class="form-control selectpicker" id="tipo" title="Tipo de veículo"
                         onchange="BuscarFabricantes(this.value)">
-                    <option class="d-none"></option>
-                    <option value="1">Carro</option>
-                    <option value="2">Moto</option>
+
+                    @foreach (var tipo in Global.ListarTipoVeiculo())
+                    {
+                        <option value="@tipo.Key">@tipo.Value</option>
+                    }
+
                 </select>
                 <span asp-validation-for="IdTipo" class="campo-invalido"></span>
             </div>
-            <div class="col-10 col-md-4">
+            <div class="col-10 col-md-3">
                 <label for="fabricante">Fabricante</label>
-                <select asp-for="Fabricante" class="form-control" id="fabricante"
-                        title="Selecione o fabricante" onchange="BuscarModelos(this.value)">
+                <select class="form-control selectpicker" id="fabricante" name="idFabricante"
+                        title="Selecione o fabricante" data-live-search="true"
+                        data-live-search-placeholder="Pesquisar" onchange="BuscarModelos(this.value)">
                 </select>
+                <input type="hidden" id="input-id-fabricante" value="@ViewBag.Fabricante" />
+                <input asp-for="Fabricante" type="hidden" id="input-fabricante" />
                 <span asp-validation-for="Fabricante" class="campo-invalido"></span>
             </div>
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-10 col-md-4">
                 <label for="modelo">Modelo</label>
-                <select asp-for="Modelo" class="form-control" id="modelo"
-                        title="Selecione o modelo" onchange="BuscarAnosModelo(this.value)">
+                <select class="form-control selectpicker" id="modelo" name="idModelo"
+                        title="Selecione o modelo" data-live-search="true"
+                        data-live-search-placeholder="Pesquisar" onchange="BuscarAnosModelo(this.value)">
                 </select>
+                <input type="hidden" id="input-id-modelo" value="@ViewBag.Modelo" />
+                <input asp-for="Modelo" type="hidden" id="input-modelo" />
                 <span asp-validation-for="Modelo" class="campo-invalido"></span>
             </div>
             <div class="col-10 col-md-2">
                 <label for="ano-modelo">Ano do modelo</label>
-                <select asp-for="AnoModelo" class="form-control" id="ano-modelo"
-                        title="Selecione o ano do modelo" onchange="BuscarValor(this.value)">
+                <select class="form-control selectpicker" id="ano-modelo" name="idAnoModelo"
+                        title="0000" onchange="BuscarValor(this.value)">
                 </select>
+                <input type="hidden" id="input-id-ano-modelo" value="@ViewBag.AnoModelo" />
+                <input asp-for="AnoModelo" type="hidden" id="input-ano-modelo" />
                 <span asp-validation-for="AnoModelo" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-2">
+                <label for="ano-fabricacao">Ano de fabricação</label>
+                <input asp-for="AnoFabricacao" class="form-control num-4" id="ano-fabricacao"
+                       placeholder="0000" title="Ano de fabricação do veículo" />
+                <span asp-validation-for="AnoFabricacao" class="campo-invalido"></span>
             </div>
             <div class="col-10 col-md-2">
                 <label for="codigo-fipe">Código FIPE</label>
@@ -63,11 +82,86 @@
                        placeholder="000000-0" title="Preenchido automaticamente" readonly />
                 <span asp-validation-for="CodigoFipe" class="campo-invalido"></span>
             </div>
-            <div class="col-10 col-md-2">
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-10 col-md-3">
                 <label for="valor-fipe">Valor FIPE</label>
                 <input asp-for="ValorFipe" class="form-control" id="valor-fipe"
-                       title="Preenchido automaticamente" readonly />
+                       placeholder="0,00" title="Preenchido automaticamente" readonly />
                 <span asp-validation-for="ValorFipe" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-3">
+                <label for="valor-mercado">Valor de mercado</label>
+                <input asp-for="ValorMercado" class="form-control real" id="valor-mercado"
+                       placeholder="0,00" title="Valor de mercado do veículo" />
+                <span asp-validation-for="ValorMercado" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-4">
+                <label for="chassi">Chassi</label>
+                <input asp-for="Chassi" class="form-control" id="chassi"
+                       maxlength="17" title="Chassi do veículo" />
+                <span asp-validation-for="Chassi" class="campo-invalido"></span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-10 col-md-2">
+                <label for="renavam">RENAVAM</label>
+                <input asp-for="Renavam" class="form-control renavam" id="renavam"
+                       placeholder="0000000000-0" title="RENAVAM do veículo" />
+                <span asp-validation-for="Renavam" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-4">
+                <label for="combustivel">Combustível</label>
+                <select asp-for="IdCombustivel" class="form-control selectpicker"
+                        id="combustivel" title="Tipo de combustível">
+
+                    @foreach (var item in Global.ListarCombustivel())
+                    {
+                        <option value="@item.Key">@item.Value</option>
+                    }
+
+                </select>
+                <span asp-validation-for="IdCombustivel" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-4">
+                <label for="cor">Cor</label>
+                <input asp-for="Cor" class="form-control" id="cor" maxlength="20"
+                       placeholder="Informe a cor do veículo" title="Cor do veículo" />
+                <span asp-validation-for="Cor" class="campo-invalido"></span>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-4">
+            <div class="col-10 col-md-4">
+                <label for="situacao">Situação do veículo</label>
+                <select asp-for="IdSituacao" class="form-control selectpicker" id="situacao"
+                        title="Tipo de veículo" onchange="TratarSituacao(this.value)">
+
+                    @foreach (var situacao in Global.ListarSituacaoVeiculo())
+                    {
+                        if (situacao.Key == 1 && Model.IdSituacao == 0)
+                        {
+                            <option value="@situacao.Key" selected>@situacao.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@situacao.Key">@situacao.Value</option>
+                        }
+                    }
+
+                </select>
+                <span asp-validation-for="IdSituacao" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-3">
+                <label for="placa">Placa</label>
+                <input asp-for="Placa" class="form-control" id="placa" maxlength="7"
+                       placeholder="AAA0000" title="Campo para veículos semi-novos e usados" readonly />
+                <span asp-validation-for="Placa" class="campo-invalido"></span>
+            </div>
+            <div class="col-10 col-md-3">
+                <label for="odometro">Odômetro (Km)</label>
+                <input asp-for="Odometro" class="form-control num-6" id="odometro" placeholder="00000"
+                       title="Campo para veículos semi-novos e usados" readonly />
+                <span asp-validation-for="Odometro" class="campo-invalido"></span>
             </div>
         </div>
 

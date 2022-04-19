@@ -10,6 +10,5 @@ namespace VendaVeiculos.Data
 
         public DbSet<Concessionaria> Concessionaria { get; set; }
         public DbSet<Veiculo> Veiculo { get; set; }
-        public DbSet<Tipo> Tipo { get; set; }
     }
 }

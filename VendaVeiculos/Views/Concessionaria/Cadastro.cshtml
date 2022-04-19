@@ -81,8 +81,8 @@
             </div>
             <div class="col-10 col-md-3 mt-3 mt-md-0">
                 <label for="uf">Estado</label>
-                <select asp-for="Uf" class="form-control" id="uf" title="Selecione o estado">
-                    <option class="d-none"></option>
+                <select asp-for="Uf" class="form-control selectpicker" id="uf" title="Selecione o estado"
+                        data-live-search="true" data-live-search-placeholder="Pesquisar">
 
                     @foreach (var estado in Global.ListarEstados())
                     {

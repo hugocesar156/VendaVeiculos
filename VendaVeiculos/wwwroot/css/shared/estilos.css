@@ -16,3 +16,12 @@ a.page-color {
     a.page-color:hover {
         background-color: rgba(0, 0, 255, 0.1) !important;
     }
+
+.selectpicker ~ button {
+    border-color: #ced4da;
+    background-color: #fff;
+}
+
+    .selectpicker ~ button div div div {
+        color: #495057;
+    }

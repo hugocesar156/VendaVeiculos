@@ -3,7 +3,14 @@
     $('.cnpj').mask('00.000.000/0000-00');
     $('.cpf').mask('000.000.000-00');
     $('.num-4').mask('0000');
+    $('.num-6').mask('000000');
+    $('.real').mask('0.000.000,00', { reverse: true });
+    $('.renavam').mask('0000000000-0');
     $('.telefone').mask('00 000000000');
+
+    $('.selectpicker').selectpicker({
+        noneResultsText: 'Nenhum registro encontrado'
+    });
 })
 
 function BuscarEndereco(cep) {
@@ -15,7 +22,7 @@ function BuscarEndereco(cep) {
                 $('#logradouro').val(endereco.logradouro);
                 $('#bairro').val(endereco.bairro);
                 $('#cidade').val(endereco.localidade);
-                $('#uf').val(endereco.uf);
+                $('#uf').selectpicker('val', endereco.uf);
                 $('#numero').val('');
             }
         });
