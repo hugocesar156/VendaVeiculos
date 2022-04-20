@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Titulo"] - VendaVeiculos</title>
+    <title>Página inicial - VendaVeiculos</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/lib/bootstrap-select/css/bootstrap-select.min.css" />
     <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
@@ -33,7 +33,7 @@
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Veículo</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="@Url.Action("Cadastro", "Veiculo")">Cadastro</a>
-                                <a class="dropdown-item" href="#">Lista</a>
+                                <a class="dropdown-item" href="@Url.Action("Lista", "Veiculo")">Lista</a>
                             </div>
                         </li>
                     </ul>

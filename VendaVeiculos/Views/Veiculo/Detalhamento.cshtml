@@ -1,0 +1,89 @@
+﻿@using VendaVeiculos.Models.Veiculo
+@using VendaVeiculos.Shared
+@model Veiculo
+
+<div class="modal fade" id="modal-detalhamento" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Registro de veículo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h5 class="text-capitalize">@Model.Fabricante @Model.Modelo</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-start">
+                            <div class="col-11">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Cor: </strong>
+                                        <label class="text-capitalize">@Model.Cor</label>
+                                    </li>
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Ano do modelo: </strong>
+                                        <label>@Model.AnoModelo</label>
+                                    </li>
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Ano de fabricação: </strong>
+                                        <label>@Model.AnoFabricacao</label>
+                                    </li>
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Combustível: </strong>
+                                        <label>@Global.ListarCombustivel().First(s => s.Key == Model.IdCombustivel).Value</label>
+                                    </li>
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Código FIPE: </strong>
+                                        <label class="codigo-fipe">@Model.CodigoFipe</label>
+                                    </li>
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Valor FIPE: </strong>
+                                        R$ <label class="real">@(Model.ValorFipe * 100)</label>
+                                    </li>
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Valor de mercado: </strong>
+                                        R$ <label class="real">@(Model.ValorMercado * 100)</label>
+                                    </li>
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Chassi: </strong>
+                                        <label>@Model.Chassi</label>
+                                    </li>
+                                    <li class="list-group-item mb-n2">
+                                        <strong>RENAVAM: </strong>
+                                        <label class="renavam">@Model.Renavam</label>
+                                    </li>
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Situação: </strong>
+                                        <label>@Global.ListarSituacaoVeiculo().First(s => s.Key == Model.IdSituacao).Value</label>
+                                    </li>
+
+                                    @if (Model.IdSituacao != (int)Global.SituacaoVeiculo.Novo)
+                                    {
+                                        <li class="list-group-item mb-n2">
+                                            <strong>Placa: </strong>
+                                            <label class="text-uppercase">@Model.Placa</label>
+                                        </li>
+                                        <li class="list-group-item mb-n2">
+                                            <strong>Odômetro: </strong>
+                                            <label>@Model.Odometro Km</label>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/shared/global.js"></script>

@@ -9,6 +9,9 @@ namespace VendaVeiculos.Models.Veiculo
     [Table("veiculo")]
     public class Veiculo
     {
+        private string _renavam;
+        private string _codigoFipe;
+
         [Column("idVeiculo"), Key]
         public int IdVeiculo { get; set; }
 
@@ -22,11 +25,11 @@ namespace VendaVeiculos.Models.Veiculo
 
         [Column("anoModelo")]
         [Required(ErrorMessage = Global.MensagemCampo.CAMPO_OBRIGATORIO)]
-        public string AnoModelo { get; set; }
+        public int? AnoModelo { get; set; }
 
         [Column("anoFabricacao"), AnoFabricacao]
         [Required(ErrorMessage = Global.MensagemCampo.CAMPO_OBRIGATORIO)]
-        public string AnoFabricacao { get; set; }
+        public int? AnoFabricacao { get; set; }
 
         [Column("cor")]
         [Required(ErrorMessage = Global.MensagemCampo.CAMPO_OBRIGATORIO)]
@@ -38,25 +41,33 @@ namespace VendaVeiculos.Models.Veiculo
 
         [Column("renavam")]
         [Required(ErrorMessage = Global.MensagemCampo.CAMPO_OBRIGATORIO)]
-        public string Renavam { get; set; }
+        public string Renavam 
+        { 
+            get => _renavam; 
+            set => _renavam = value?.Replace("-", ""); 
+        }
 
         [Column("codigoFipe")]
         [Required(ErrorMessage = Global.MensagemCampo.CAMPO_OBRIGATORIO)]
-        public string CodigoFipe { get; set; }
+        public string CodigoFipe
+        {
+            get => _codigoFipe;
+            set => _codigoFipe = value?.Replace("-", "");
+        }
 
         [Column("valorFipe")]
         [Required(ErrorMessage = Global.MensagemCampo.CAMPO_OBRIGATORIO)]
-        public string ValorFipe { get; set; }
+        public float? ValorFipe { get; set; }
 
         [Column("valorMercado")]
         [Required(ErrorMessage = Global.MensagemCampo.CAMPO_OBRIGATORIO)]
-        public string ValorMercado { get; set; }
+        public float? ValorMercado { get; set; }
 
         [Column("placa"), SeminovoUsado(nameof(Placa))]
         public string Placa { get; set; }
 
-        [Column("quilometragem"), SeminovoUsado(nameof(Odometro)), Odometro]
-        public string Odometro { get; set; }
+        [Column("odometro"), SeminovoUsado(nameof(Odometro)), Odometro]
+        public int? Odometro { get; set; }
 
         [Column("idTipo")]
         [Required(ErrorMessage = Global.MensagemCampo.CAMPO_OBRIGATORIO)]

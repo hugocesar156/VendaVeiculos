@@ -1,5 +1,6 @@
-﻿@using VendaVeiculos.Models.Concessionaria
-@model IPagedList<Concessionaria>
+﻿@using VendaVeiculos.Models.Veiculo
+@using VendaVeiculos.Shared
+@model IPagedList<Veiculo>
 
 @if (ViewBag.Notificacao != null)
 {
@@ -17,35 +18,41 @@
         <table class="table table-hover">
             <thead>
                 <tr>
-                    <th>Razão Social</th>
-                    <th>Nome Fantasia</th>
-                    <th>CNPJ</th>
+                    <th>Modelo</th>
+                    <th>Ano</th>
+                    <th>Cor</th>
+                    <th>Valor</th>
+                    <th>Situação</th>
+                    <th>Concessionária</th>
                     <th class="text-center">Ações</th>
                 </tr>
             </thead>
             <tbody>
 
-                @foreach (var item in Model ?? new List<Concessionaria>().ToPagedList())
+                @foreach (var item in Model ?? new List<Veiculo>().ToPagedList())
                 {
                     <tr>
-                        <td class="align-middle text-capitalize">@item.RazaoSocial</td>
-                        <td class="align-middle text-capitalize">@item.NomeFantasia</td>
-                        <td class="align-middle cnpj">@item.Cnpj</td>
+                        <td class="align-middle">@($"{item.Fabricante} {item.Modelo}")</td>
+                        <td class="align-middle">@item.AnoModelo</td>
+                        <td class="align-middle text-capitalize">@item.Cor</td>
+                        <td class="align-middle real">@(item.ValorMercado * 100)</td>
+                        <td class="align-middle">@Global.ListarSituacaoVeiculo().First(s => s.Key == item.IdSituacao).Value</td>
+                        <td class="align-middle text-capitalize">@item.Concessionaria.NomeFantasia</td>
                         <td style="width: 15%;">
                             <div class="btn-group btn-block" role="group">
                                 <a class="btn btn-sm btn-outline-danger" data-toggle="modal"
                                data-target="#modal-remocao" href="#"
-                               onclick="$('#registro-remocao').html('@item.RazaoSocial');$('#id-remocao').val('@item.IdConcessionaria')">
+                               onclick="$('#registro-remocao').html('@($"{item.Fabricante} {item.Modelo}")');$('#id-remocao').val('@item.IdVeiculo')">
                                     <i class="fa fa-trash"></i>
                                 </a>
                                 <a class="btn btn-sm btn-outline-primary" data-ajax="true"
                                data-ajax-update="#conteudo-modal-detalhamento"
                                data-ajax-success="$('#modal-detalhamento').modal('show')"
-                               href="@Url.Action("Detalhamento", new { item.IdConcessionaria })">
+                               href="@Url.Action("Detalhamento", new { item.IdVeiculo })">
                                     <i class="fa fa-info-circle"></i>
                                 </a>
                                 <a class="btn btn-sm btn-outline-primary"
-                               href="@Url.Action("Edicao", new { idConcessionaria = item.IdConcessionaria })">
+                               href="@Url.Action("Edicao", new { IdVeiculo = item.IdVeiculo })">
                                     <i class="fa fa-pen"></i>
                                 </a>
                             </div>
@@ -69,10 +76,9 @@
                 <p class="text-center">Nenhum registro encontrado.</p>
             }
         }
-
     </div>
     <div class="ml-auto m-3">
-        @Html.PagedListPager(Model ?? new List<Concessionaria>().ToPagedList(),
+        @Html.PagedListPager(Model ?? new List<Veiculo>().ToPagedList(),
         pagina => Url.Action("PaginacaoLista",
         new { pagina = pagina, tamanhoPagina = ViewBag.TamanhoPagina ?? 25, pesquisa = ViewBag.Pesquisa }),
         PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(

@@ -5,13 +5,13 @@
     let fabricante = $('#input-id-fabricante').val();
     let modelo = $('#input-id-modelo').val();
 
-    if (tipo != null)
+    if (tipo != null && tipo != '')
         AtualizaSeletorFabricante(tipo);
 
-    if (fabricante != null)
+    if (fabricante != null && fabricante != '')
         AtualizaSeletorModelo(tipo, fabricante);
 
-    if (modelo != null)
+    if (modelo != null && modelo != '')
         AtualizaSeletorAnoModelo(tipo, fabricante, modelo);
 })
 
@@ -29,6 +29,7 @@ function AtualizaSeletorAnoModelo(tipo, fabricante, modelo) {
 
         if ($('#input-id-ano-modelo').val() != null) {
             $('#ano-modelo').selectpicker('val', $('#input-id-ano-modelo').val());
+            BuscarValor($('#ano-modelo').val());
         }
     });
 }
@@ -126,7 +127,7 @@ function BuscarValor(anoModelo) {
 
     $.getJSON(`https://parallelum.com.br/fipe/api/v1/${TratarTipo(tipo)}/marcas/${fabricante}/modelos/${modelo}/anos/${anoModelo}`, function (veiculo) {
         $('#codigo-fipe').val(veiculo.CodigoFipe);
-        $('#valor-fipe').val(veiculo.Valor);
+        $('#valor-fipe').val(veiculo.Valor.replace('R$ ', ''));
     });
 }
 

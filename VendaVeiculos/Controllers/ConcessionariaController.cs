@@ -41,13 +41,15 @@ namespace VendaVeiculos.Controllers
         [HttpGet]
         public IActionResult Lista()
         {
+            ViewBag.Titulo = "Lista de concessionárias";
+
             try
             {
-                return View(_reposConcessionaria.ListarPaginado());
+                return View("_Lista", _reposConcessionaria.ListarPaginado());
             }
             catch (Exception)
             {
-                return View();
+                return View("_Lista");
             }
         }
 
@@ -82,11 +84,11 @@ namespace VendaVeiculos.Controllers
         }
 
         [HttpGet]
-        public PartialViewResult RemoverRegistro(int idConcessionaria)
+        public PartialViewResult RemoverRegistro(int idObjeto)
         {
             try
             {
-                if (_reposConcessionaria.Remover(idConcessionaria))
+                if (_reposConcessionaria.Remover(idObjeto))
                 {
                     ViewBag.Notificacao = new Dictionary<string, dynamic>
                     {

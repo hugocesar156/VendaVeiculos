@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     $('.cep').mask('00000-000');
     $('.cnpj').mask('00.000.000/0000-00');
+    $('.codigo-fipe').mask('000000-0');
     $('.cpf').mask('000.000.000-00');
     $('.num-4').mask('0000');
     $('.num-6').mask('000000');

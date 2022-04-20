@@ -11,7 +11,7 @@ namespace VendaVeiculos.Validations
         protected override ValidationResult IsValid(object value, ValidationContext context)
         {
             var propriedade = context.ObjectType.GetProperty(_nome);
-            var valor = (string)propriedade.GetValue(context.ObjectInstance);
+            var valor = propriedade.GetValue(context.ObjectInstance);
 
             var idSituacao = (int)context.ObjectType
                 .GetProperty("IdSituacao").GetValue(context.ObjectInstance);

@@ -3,11 +3,11 @@
 @model Veiculo
 
 @{
-    ViewData["Titulo"] = "Cadastro de veículo - VendaVeículos";
+    ViewData["Titulo"] = "Edição de veículo - VendaVeículos";
 }
 
-<h4 class="text-center">Cadastro de veículo</h4>
-<form asp-action="ValidarCadastro" asp-antiforgery="true" data-ajax="true"
+<h4 class="text-center">Edição de veículo</h4>
+<form asp-action="ValidarEdicao" asp-antiforgery="true" data-ajax="true"
       data-ajax-method="post" data-ajax-update="#ajax-update-area">
     <div class="container" style="width: 90%">
         <div class="row justify-content-center mt-4">
@@ -18,9 +18,18 @@
 
                     @foreach (var concessionaria in ViewBag.Concessionarias)
                     {
-                        <option value="@concessionaria.IdConcessionaria" data-subtext="@concessionaria.Cnpj">
-                            @concessionaria.NomeFantasia
-                        </option>
+                        if (Model.IdConcessionaria == concessionaria.IdConcessionaria)
+                        {
+                            <option value="@concessionaria.IdConcessionaria" data-subtext="@concessionaria.Cnpj" selected>
+                                @concessionaria.NomeFantasia
+                            </option>
+                        }
+                        else
+                        {
+                            <option value="@concessionaria.IdConcessionaria" data-subtext="@concessionaria.Cnpj">
+                                @concessionaria.NomeFantasia
+                            </option>
+                        }
                     }
 
                 </select>
@@ -33,7 +42,14 @@
 
                     @foreach (var tipo in Global.ListarTipoVeiculo())
                     {
-                        <option value="@tipo.Key">@tipo.Value</option>
+                        if (Model.IdTipo == tipo.Key)
+                        {
+                            <option value="@tipo.Key" selected>@tipo.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@tipo.Key">@tipo.Value</option>
+                        }
                     }
 
                 </select>
@@ -115,7 +131,14 @@
 
                     @foreach (var item in Global.ListarCombustivel())
                     {
-                        <option value="@item.Key">@item.Value</option>
+                        if (Model.IdCombustivel == item.Key)
+                        {
+                            <option value="@item.Key" selected>@item.Value</option>
+                        }
+                        else
+                        {
+                            <option value="@item.Key">@item.Value</option>
+                        }
                     }
 
                 </select>
@@ -136,7 +159,7 @@
 
                     @foreach (var situacao in Global.ListarSituacaoVeiculo())
                     {
-                        if (situacao.Key == 1 && Model.IdSituacao == 0)
+                        if (Model.IdSituacao == situacao.Key)
                         {
                             <option value="@situacao.Key" selected>@situacao.Value</option>
                         }
@@ -187,5 +210,6 @@
     </div>
 </form>
 
+<script src="~/js/veiculo/edicao.js" defer></script>
 <script src="~/js/veiculo/cadastro.js" defer></script>
 <script src="~/js/shared/global.js" defer></script>

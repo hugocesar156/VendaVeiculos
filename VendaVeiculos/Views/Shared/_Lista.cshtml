@@ -1,14 +1,12 @@
-﻿@using VendaVeiculos.Models.Concessionaria
-@model IPagedList<Concessionaria>
-
-@{
-    ViewData["Titulo"] = "Registro de concessionárias - VendaVeículos";
+﻿@{
+    var titulo = ViewBag.Titulo;
+    ViewData["Titulo"] = $"{titulo} - VendaVeículos";
 }
 
-<h4 class="text-center">Registro de concessionárias</h4>
+<h4 class="text-center">@titulo</h4>
 <div class="row justify-content-start mt-4 mt-md-2">
     <div class="col">
-        <a class="btn btn-success" href="@Url.Action("Cadastro", "Concessionaria")">Novo registro</a>
+        <a class="btn btn-success" href="@Url.Action("Cadastro")">Novo registro</a>
     </div>
 </div>
 <form asp-action="PaginacaoLista" id="form-lista" data-ajax-method="get"
@@ -31,7 +29,7 @@
 </form>
 <div id="conteudo-tabela">
     @{
-        await Html.RenderPartialAsync("Tabela", Model);
+        await Html.RenderPartialAsync("Tabela");
     }
 </div>
 <div id="conteudo-modal-detalhamento">
@@ -54,7 +52,7 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                     <button type="submit" class="btn btn-danger">Confirmar</button>
                 </div>
-                <input id="id-remocao" type="hidden" name="idConcessionaria" />
+                <input id="id-remocao" type="hidden" name="idObjeto" />
             </form>
         </div>
     </div>

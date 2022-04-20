@@ -2,7 +2,7 @@
 
 namespace VendaVeiculos.Shared
 {
-    public class Global
+    public static class Global
     {
         public enum SituacaoVeiculo
         {

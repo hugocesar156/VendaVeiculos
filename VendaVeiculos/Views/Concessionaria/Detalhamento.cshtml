@@ -2,7 +2,7 @@
 @model Concessionaria
 
 <div class="modal fade" id="modal-detalhamento" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Registro de concessionária</h5>
@@ -11,41 +11,49 @@
                 </button>
             </div>
             <div class="modal-body">
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">
-                        <h5 class="mb-3">Dados gerais</h5>
-                        <div>
-                            <strong>Razão Social: </strong>
-                            <label class="text-capitalize">@Model.RazaoSocial</label>
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h5 class="text-capitalize">@Model.RazaoSocial</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row justify-content-start">
+                            <div class="col-11">
+                                <h5 class="mb-3">Dados gerais</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Nome Fantasia: </strong>
+                                        <label class="text-capitalize">@Model.NomeFantasia</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>CNPJ: </strong>
+                                        <label class="cnpj">@Model.Cnpj</label>
+                                    </li>
+                                </ul>
+                                <h5 class="my-3">Contato</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Email: </strong>
+                                        <label>@Model.Email</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Telefone: </strong>
+                                        <label class="telefone">@Model.Telefone</label>
+                                    </li>
+                                </ul>
+                                <h5 class="my-3">Localização</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item mb-n2">
+                                        <strong>Endereço: </strong>
+                                        <label class="text-capitalize">
+                                            @Model.Logradouro, @Model.Bairro - @Model.Numero.
+                                            @Model.Cidade, @Model.Uf | @Model.Cep
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div>
-                            <strong>Nome Fantasia: </strong>
-                            <label class="text-capitalize">@Model.NomeFantasia</label>
-                        </div>
-                        <div>
-                            <strong>CNPJ: </strong>
-                            <label class="cnpj">@Model.Cnpj</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <h5 class="mb-3">Contato</h5>
-                        <div>
-                            <strong>Email: </strong>
-                            <label>@Model.Email</label>
-                        </div>
-                        <div>
-                            <strong>Telefone: </strong>
-                            <label class="telefone">@Model.Telefone</label>
-                        </div>
-                    </li>
-                    <li class="list-group-item">
-                        <h5 class="mb-3">Endereço</h5>
-                        <div>
-                            <label class="text-capitalize">@Model.Logradouro, @Model.Bairro - @Model.Numero</label>
-                            <br /><label class="text-capitalize">@Model.Cidade, @Model.Uf | @Model.Cep</label>
-                        </div>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>

@@ -358,7 +358,6 @@ D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\bin\Debug\net
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\bin\Debug\netcoreapp3.1\System.Diagnostics.DiagnosticSource.dll
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Configuration.Abstractions.dll
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Notificacao.cshtml.g.cs
-D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\obj\Debug\netcoreapp3.1\Razor\Views\Concessionaria\Lista.cshtml.g.cs
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\bin\Debug\netcoreapp3.1\JetBrains.Annotations.dll
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\bin\Debug\netcoreapp3.1\X.PagedList.dll
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\bin\Debug\netcoreapp3.1\X.PagedList.Mvc.Core.dll
@@ -733,3 +732,7 @@ D:\Projetos\Venda veículos\plataforma\VendaVeiculos\obj\Debug\netcoreapp3.1\Ven
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\obj\Debug\netcoreapp3.1\VendaVeiculos.pdb
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\obj\Debug\netcoreapp3.1\VendaVeiculos.genruntimeconfig.cache
 D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\obj\Debug\netcoreapp3.1\Razor\Views\Veiculo\Cadastro.cshtml.g.cs
+D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Lista.cshtml.g.cs
+D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\obj\Debug\netcoreapp3.1\Razor\Views\Veiculo\Tabela.cshtml.g.cs
+D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\obj\Debug\netcoreapp3.1\Razor\Views\Veiculo\Detalhamento.cshtml.g.cs
+D:\Projetos\Venda veículos\plataforma\VendaVeiculos\VendaVeiculos\obj\Debug\netcoreapp3.1\Razor\Views\Veiculo\Edicao.cshtml.g.cs
